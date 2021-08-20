@@ -6,12 +6,13 @@ namespace polygon {
 
      function draw2DPolygon(center_x: number, center_y: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
 
+        let PI = 3.14159265358979311600;
         let lastX = center_x +  radius * Math.cos(0) //cos(0) == 1;
         let lastY = center_y +  radius *  Math.sin(0) //sin(0) == 0;
 
         for (let i = 1; i <= sides; i += 1) {
-            let newX = center_x + Math.ceil(radius * Math.cos(i * 2 * Math.PI / sides));
-            let newY = center_y + Math.ceil(radius * Math.sin(i * 2 * Math.PI / sides));
+            let newX = center_x + Math.ceil(radius * Math.cos(i * 2 * PI / sides));
+            let newY = center_y + Math.ceil(radius * Math.sin(i * 2 * PI / sides));
             shapes.line( block, toWorld(lastX, lastY), toWorld(newX, newY));
             lastX = newX;
             lastY = newY;
@@ -19,7 +20,7 @@ namespace polygon {
     }
 
     function fill2DPolygon(center_x: number, center_y: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
-        
+
     }
 
     /**
