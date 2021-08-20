@@ -4,7 +4,7 @@
 //% weight=94 color=#ffab19 icon="\uf287"
 namespace polygon {
 
-     function draw2DPolygon(x0: number, y0: number, radius: number, block: number, toWorld: (x: number, y: number) => Position) {
+     function draw2DPolygon(x0: number, y0: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
         let x = radius;
         let y = 0;
         let err = 0;
@@ -34,7 +34,7 @@ namespace polygon {
         }
     }
 
-    function fill2DPolygon(x0: number, y0: number, radius: number, block: number, toWorld: (x: number, y: number) => Position) {
+    function fill2DPolygon(x0: number, y0: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
         let x = radius;
         let y = 0;
         let err = 0;
@@ -60,10 +60,12 @@ namespace polygon {
      * Fill a regular polygon of blocks at a center position.
      * @param radius the radius of the polygon, eg: 5
      */
-    //% blockId=minecraftPolygon block="polygon of %block=minecraftBlock|center %center=minecraftCreatePosition|radius %radius| sides %sides |around %orientation|%operator"
+    //% blockId=minecraftPolygon block="polygon of %block=minecraftBlock|center %center=minecraftCreatePosition|radius %radius|sides %sides |around %orientation|%operator"
     //% block.shadow=minecraftBlock
     //% blockExternalInputs=1 weight=95
     //% help=shapes/polygon
+    //% radius.defl=5
+    //% operator.defl=ShapeOperation.Outline
 
     export function polygon(block: number,
         center: Position,
