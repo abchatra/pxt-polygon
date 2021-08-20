@@ -1,0 +1,21 @@
+{
+    "name": "data-streamer",
+    "version": "0.1.0",
+    "description": "Building polygon in Minecraft EE",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "extension.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "supportedTargets": [
+        "minecraft"
+    ],
+    "preferredEditor": "tsprj"
+}
