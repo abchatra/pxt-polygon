@@ -4,56 +4,22 @@
 //% weight=94 color=#ffab19 icon="\uf287"
 namespace polygon {
 
-     function draw2DPolygon(x0: number, y0: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
-        let x = radius;
-        let y = 0;
-        let err = 0;
+     function draw2DPolygon(center_x: number, center_y: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
 
-        while (x >= y) {
-            blocks.place(block, toWorld(x0 + x, y0 + y));
-            blocks.place(block, toWorld(x0 + x, y0 - y))
+        let lastX = center_x +  radius * Math.cos(0) //cos(0) == 1;
+        let lastY = center_y +  radius *  Math.sin(0) //sin(0) == 0;
 
-            blocks.place(block, toWorld(x0 + y, y0 + x));
-            blocks.place(block, toWorld(x0 + y, y0 - x));
-
-            blocks.place(block, toWorld(x0 - y, y0 + x));
-            blocks.place(block, toWorld(x0 - y, y0 - x));
-
-            blocks.place(block, toWorld(x0 - x, y0 + y));
-            blocks.place(block, toWorld(x0 - x, y0 - y));
-
-
-            if (err <= 0) {
-                y += 1;
-                err += 2 * y + 1;
-            }
-            if (err > 0) {
-                x -= 1;
-                err -= 2 * x + 1;
-            }
+        for (let i = 1; i <= sides; i += 1) {
+            let newX = center_x + Math.ceil(radius * Math.cos(i * 2 * Math.PI / sides));
+            let newY = center_y + Math.ceil(radius * Math.sin(i * 2 * Math.PI / sides));
+            shapes.line( block, toWorld(lastX, lastY), toWorld(newX, newY));
+            lastX = newX;
+            lastY = newY;
         }
     }
 
-    function fill2DPolygon(x0: number, y0: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
-        let x = radius;
-        let y = 0;
-        let err = 0;
-
-        while (x >= y) {
-            blocks.fill(block, toWorld(x0 + x, y0 + y), toWorld(x0 + x, y0 - y));
-            blocks.fill(block, toWorld(x0 + y, y0 + x), toWorld(x0 + y, y0 - x));
-            blocks.fill(block, toWorld(x0 - y, y0 + x), toWorld(x0 - y, y0 - x));
-            blocks.fill(block, toWorld(x0 - x, y0 + y), toWorld(x0 - x, y0 - y));
-
-            if (err <= 0) {
-                y += 1;
-                err += 2 * y + 1;
-            }
-            if (err > 0) {
-                x -= 1;
-                err -= 2 * x + 1;
-            }
-        }
+    function fill2DPolygon(center_x: number, center_y: number, radius: number, sides:number, block: number, toWorld: (x: number, y: number) => Position) {
+        
     }
 
     /**
